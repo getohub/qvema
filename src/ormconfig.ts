@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import { User } from "./modules/users/entities/user.entity";
+import { Project } from "./modules/projects/entities/project.entity";
 
 const dataSource = new DataSource({
     type: 'mysql',
@@ -8,7 +9,7 @@ const dataSource = new DataSource({
     username: process.env.DATABASE_USERNAME || 'root',
     password: process.env.DATABASE_PASSWORD || '',
     database: process.env.DATABASE_NAME || 'qvema',
-    entities: [User],
+    entities: [User, Project],
     migrations: ['src/migrations/*.ts'],
     synchronize: true,  // synchronise la base de données (à désactiver en production)
 });
