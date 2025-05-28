@@ -16,9 +16,7 @@ export class ProjectsController {
   create(@Body() createProjectDto: CreateProjectDto, @Request() req) {
     return this.projectsService.create(createProjectDto, req.user.userId);
   }
-
   @Get()
-  @UseGuards(JwtAuthGuard)
   findAll() {
     return this.projectsService.findAll();
   }

@@ -6,9 +6,7 @@ import { Project } from './entities/project.entity';
 export class ProjectsRepository extends Repository<Project> {
     constructor(private dataSource: DataSource) {
         super(Project, dataSource.createEntityManager());
-    }
-
-    async findByOwnerId(ownerId: number): Promise<Project[]> {
+    }    async findByOwnerId(ownerId: string): Promise<Project[]> {
         return this.find({ where: { ownerId } });
     }
 

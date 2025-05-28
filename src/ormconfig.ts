@@ -1,17 +1,15 @@
 import { DataSource } from "typeorm";
-import { User } from "./modules/users/entities/user.entity";
-import { Project } from "./modules/projects/entities/project.entity";
 
 const dataSource = new DataSource({
     type: 'mysql',
-    host: process.env.DATABASE_HOST || 'localhost',
-    port: Number(process.env.DATABASE_PORT) || 3306,
-    username: process.env.DATABASE_USERNAME || 'root',
-    password: process.env.DATABASE_PASSWORD || '',
-    database: process.env.DATABASE_NAME || 'qvema',
-    entities: [User, Project],
-    migrations: ['src/migrations/*.ts'],
-    synchronize: true,  // synchronise la base de données (à désactiver en production)
+    host: process.env.DB_HOST ?? 'localhost',
+    port: parseInt(process.env.DB_PORT ?? '3306', 10),
+    username: process.env.DB_USERNAME ?? 'root',
+    password: process.env.DB_PASSWORD ?? '',
+    database: process.env.DB_DATABASE ?? 'qvema',
+    entities: [__dirname + '/modules/**/*.entity{.ts,.js}'],
+    synchronize: process.env.NODE_ENV !== 'production',
+    logging: process.env.NODE_ENV !== 'production',
 });
 
 export default dataSource;

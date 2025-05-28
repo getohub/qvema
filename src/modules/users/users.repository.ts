@@ -23,8 +23,7 @@ export class UsersRepository extends Repository<User> {
         const user = this.create(userData);
         return this.save(user);
     }
-    
-    async updateUser(id: number, userData: Partial<User>): Promise<User | null> {
+      async updateUser(id: string, userData: Partial<User>): Promise<User | null> {
         await this.update(id, userData);
         return this.findOneBy({ id });
     }
